@@ -8,12 +8,58 @@ from datetime import datetime
 from sklearn.externals import joblib
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
+import pygame
 clf = joblib.load('model_32_py3.pkl')
 
+music_first = True
+now_music_station = ""
+music_station = ""
+music_name = ""
+run_music_list = ['01.mp3']
+fast_music_list = ['01.mp3']
+slow_music_list = ['01.mp3']
+pygame.mixer.init()
 # Register
 power_mgmt_1 = 0x6b
 power_mgmt_2 = 0x6c
  
+def change_music(music_station):
+    global now_music_station
+    global music_name
+    #抓取外部變數
+    #進行現在的狀態和下的命令，如果一樣則不執行，直接回傳上一次的音樂名稱
+    if music_station != now_music_station:
+        global music_first
+        # global run_music_list
+        # global fast_music_list
+        # global slow_music_list
+        # 檢查音樂撥放狀態，如果撥放中，就淡出結束音樂
+        if music_station != now_music_station and music_first != True:
+            # print(pygame.mixer.music.get_busy())
+            if pygame.mixer.music.get_busy() == 1:
+                # print("停止音樂")
+                pygame.mixer.music.fadeout(3000)
+                time.sleep(3)
+        # 檢查相對應狀態，載入相對應歌曲
+        if music_station == "run":
+            pygame.mixer.music.load('03.mp3')
+            music_name = '03.mp3'
+        elif music_station == "fast":
+            pygame.mixer.music.load('02.mp3')
+            music_name = '02.mp3'
+        elif music_station == "slow":
+            pygame.mixer.music.load('01.mp3')
+            music_name = '01.mp3'
+        # 撥放音樂
+        # pygame.mixer.music.play(n,start,stop)#第一个参数为播放次数，如果是-1表示循环播放，省略表示只播放1次。第二个参数和第三个参数分别表示播放的起始和结束位置。
+        pygame.mixer.music.play(-1)
+        # print("撥放音樂")
+        #修改狀態為執行中的狀態
+        now_music_station = music_station
+        #將第一次執行設為False
+        music_first = False
+    return music_name
+
 def read_byte(reg):
     return bus.read_byte_data(address, reg)
  
@@ -106,10 +152,9 @@ while(True):
                 counts = np.bincount(status_list)
                 status_music = np.argmax(counts)
                 status = list(status_dict.keys())[list(status_dict.values()).index(status_music)]
-                # music = change_music(status)
+                music = change_music(status)
                 print(status_list)
                 status_list = []
-                music = 'test'
                 print('status: {}, music: {}'.format(status, music))
             df.drop(df.index, inplace=True)
             df_new.drop(df_new.index, inplace=True)
