@@ -1,7 +1,7 @@
 # gyro
 This repo is build for raspberry pi 3B+ to get sensors' data into local or send to kafka
 ## sensor 1: pulse sensor + sda1015 
-  * heartBeats.py
+  * ```heartBeats.py```
     - it will send every bpm to kafka using 8082 port(restproxy)
     - remember to change id, kafka's ip and toopic name
 ## sensor 2: MPU6050 Gyro Sensor
