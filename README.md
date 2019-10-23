@@ -6,6 +6,7 @@ sudo pip install adafruit-ads1x15
 sudo apt-get install python3-numpy
 sudo apt-get install python3-scipy
 sudo apt-get install python3-pandas
+sudo apt-get install libatlas-base-dev
 sudo pip3 install scikit-learn -U
 ```
 ## sensor 1: pulse sensor + sda1015 (python2)
