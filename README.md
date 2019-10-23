@@ -1,5 +1,12 @@
 # gyro
-This repo is build for raspberry pi 3B+ to get sensors' data into local or send to kafka
+This repo is build for raspberry pi 3B+ to get sensors' data into local or send to kafka\n
+please install these package first
+```bash
+sudo apt-get install python3-numpy
+sudo apt-get install python3-scipy
+sudo apt-get install python3-pandas
+sudo pip3 install scikit-learn -U
+```
 ## sensor 1: pulse sensor + sda1015 
   * ```heartBeats.py```
     - it will send every bpm to kafka using 8082 port(restproxy)
