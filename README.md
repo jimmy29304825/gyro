@@ -2,17 +2,17 @@
 This repo is build for raspberry pi 3B+ to get sensors' data into local or send to kafka<br />
 please install these package first
 ```bash
-sudo pip3 install adafruit-ads1x15
+sudo pip install adafruit-ads1x15
 sudo apt-get install python3-numpy
 sudo apt-get install python3-scipy
 sudo apt-get install python3-pandas
 sudo pip3 install scikit-learn -U
 ```
-## sensor 1: pulse sensor + sda1015 
+## sensor 1: pulse sensor + sda1015 (python2)
   * ```heartBeats.py```
     - it will send every bpm to kafka using 8082 port(restproxy)
     - remember to change id, kafka's ip and toopic name
-## sensor 2: MPU6050 Gyro Sensor
+## sensor 2: MPU6050 Gyro Sensor (python3)
   * ```gyro_test.py```
     - get data from the sensor and write into csv
     - csv file will be written when df's length = 300(about 8 - 10 sec)
@@ -31,5 +31,5 @@ sudo pip3 install scikit-learn -U
   * ```steps_record.py```(not using)
     - code to caculate the step per minute
     - sensor is too sensitive, could not get correct spm now
-## sensor 3: gps module
+## sensor 3: gps module (python3)
   * TBC
