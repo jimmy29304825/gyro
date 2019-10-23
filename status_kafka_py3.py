@@ -102,7 +102,7 @@ df_new = pd.DataFrame(columns=['X_avg', 'Y_avg', 'Z_avg', 'Xr_avg', 'Yr_avg', 'Z
 id = 'jimmy'
 status_list = []
 # kafka's ip and port
-status_kafka="http://54.95.97.151:8082/topics/status"
+status_kafka="http://3.112.251.247:8082/topics/test"
 headers = { "Content-Type" : "application/vnd.kafka.json.v2+json" }
 
 count = 1
