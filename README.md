@@ -1,7 +1,8 @@
 # gyro
-This repo is build for raspberry pi 3B+ to get sensors' data into local or send to kafka\n
+This repo is build for raspberry pi 3B+ to get sensors' data into local or send to kafka<br />
 please install these package first
 ```bash
+sudo pip3 install adafruit-ads1x15
 sudo apt-get install python3-numpy
 sudo apt-get install python3-scipy
 sudo apt-get install python3-pandas
