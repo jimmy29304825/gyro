@@ -9,27 +9,23 @@ from sklearn.externals import joblib
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 import pygame
-# clf = joblib.load('model_32_py3.pkl')
-
-music_first = True
-now_music_station = ""
-music_station = ""
-music_name = ""
-run_music_list = ['01.mp3']
-fast_music_list = ['01.mp3']
-slow_music_list = ['01.mp3']
-pygame.mixer.init()
-# Register
-power_mgmt_1 = 0x6b
-power_mgmt_2 = 0x6c
  
 def change_music(music_station):
     global now_music_station
     global music_name
+    # music_first = True
+    now_music_station = ""
+    music_station = ""
+    music_name = ""
+    run_music_list = ['01.mp3']
+    fast_music_list = ['01.mp3']
+    slow_music_list = ['01.mp3']
+
     #抓取外部變數
     #進行現在的狀態和下的命令，如果一樣則不執行，直接回傳上一次的音樂名稱
     if music_station != now_music_station:
         global music_first
+        music_first = True
         # global run_music_list
         # global fast_music_list
         # global slow_music_list
@@ -89,32 +85,25 @@ def get_x_rotation(x,y,z):
 
 def status(): 
     #!/usr/bin/python
-    import smbus
-    import math
-    import time
-    import pandas as pd 
-    import requests, json
-    from datetime import datetime
-    from sklearn.externals import joblib
-    from sklearn.ensemble import RandomForestClassifier
-    import numpy as np
-    import pygame
+    global bus
+    global address
+    bus = smbus.SMBus(1)
     clf = joblib.load('model_32_py3.pkl')
     
-    music_first = True
-    now_music_station = ""
-    music_station = ""
-    music_name = ""
-    run_music_list = ['01.mp3']
-    fast_music_list = ['01.mp3']
-    slow_music_list = ['01.mp3']
-    pygame.mixer.init()
+#    music_first = True
+#    now_music_station = ""
+#    music_station = ""
+#    music_name = ""
+#    run_music_list = ['01.mp3']
+#    fast_music_list = ['01.mp3']
+#    slow_music_list = ['01.mp3']
+#    pygame.mixer.init()
     # Register
     power_mgmt_1 = 0x6b
     power_mgmt_2 = 0x6c
 
 
-    bus = smbus.SMBus(1) # bus = smbus.SMBus(0) fuer Revision 1
+    # bus = smbus.SMBus(1) # bus = smbus.SMBus(0) fuer Revision 1
     address = 0x68       # via i2cdetect
  
     # Aktivieren, um das Modul ansprechen zu koennen
@@ -129,7 +118,7 @@ def status():
     id = 'jimmy'
     status_list = []
     # kafka's ip and port
-    status_kafka="http://3.112.251.247:8082/topics/test"
+    status_kafka="http://3.112.123.88:8082/topics/status"
     headers = { "Content-Type" : "application/vnd.kafka.json.v2+json" }
 
     count = 1
